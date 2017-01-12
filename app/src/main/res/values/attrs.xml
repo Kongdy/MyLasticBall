@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 自定义属性 -->
+<resources>
+
+    <!-- 弹性小球自定义属性 -->
+    <declare-styleable name="ElasticBall">
+        <!-- 圆球的颜色 -->
+        <attr name="ball_color" format="color"/>
+        <!-- 圆球的半径 -->
+        <attr name="ball_radius" format="dimension"/>
+    </declare-styleable>
+
+    <!-- 弹性小球自定义属性 -->
+    <declare-styleable name="MyElasticBall">
+        <!-- 圆球的颜色 -->
+        <attr name="m_ball_color" format="color"/>
+        <!-- 圆球的半径 -->
+        <attr name="m_ball_radius" format="dimension"/>
+    </declare-styleable>
+
+</resources>
