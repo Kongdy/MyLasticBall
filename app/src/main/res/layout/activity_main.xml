@@ -14,6 +14,6 @@
     <com.project.kongdy.myelasticball.view.ElasticBall
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:ball_radius="10dp"
+        app:ball_radius="20dp"
         app:ball_color="@android:color/holo_red_light"/>
 </RelativeLayout>

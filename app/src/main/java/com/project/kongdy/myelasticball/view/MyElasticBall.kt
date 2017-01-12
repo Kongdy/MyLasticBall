@@ -77,9 +77,13 @@ class MyElasticBall : View {
         val mWidth = w-paddingLeft-paddingRight
         val mHeight = h-paddingTop-paddingBottom
 
+        val centerX = mWidth/2F
+        val centerY = mHeight/2F
+
         mainPath.reset()
-        mainPath.moveTo(50F,mHeight/2F)
-        mainPath.quadTo(mWidth/3F,mHeight/3F,mWidth*2F/3F,mHeight/2F)
+        mainPath.moveTo(centerX,centerY+radius)
+        mainPath.quadTo(centerX-radius,centerY,centerX,centerY-radius)
+        mainPath.quadTo(centerX+radius,centerY,centerX,centerY+radius)
     }
 
     override fun onDraw(canvas: Canvas?) {
