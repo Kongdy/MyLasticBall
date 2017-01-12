@@ -60,6 +60,7 @@ class MyElasticBall : View {
 
         mainPaint.style = Paint.Style.STROKE
         mainPaint.strokeCap = Paint.Cap.ROUND
+        mainPaint.strokeJoin = Paint.Join.ROUND
     }
 
     /*
@@ -82,8 +83,8 @@ class MyElasticBall : View {
 
         mainPath.reset()
         mainPath.moveTo(centerX,centerY+radius)
-        mainPath.quadTo(centerX-radius,centerY,centerX,centerY-radius)
-        mainPath.quadTo(centerX+radius,centerY,centerX,centerY+radius)
+        mainPath.cubicTo(centerX-radius,centerY,centerX,centerY-radius,centerX+radius,centerY)
+        mainPath.cubicTo(centerX,centerY-radius,centerX+radius,centerY,centerX,centerY+radius)
     }
 
     override fun onDraw(canvas: Canvas?) {
