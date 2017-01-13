@@ -2,6 +2,8 @@ package com.project.kongdy.myelasticball
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import com.project.kongdy.myelasticball.view.MyElasticBall
 
 /**
  * @author Kongdy
@@ -14,8 +16,15 @@ import android.os.Bundle
  */
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var meb_my_ball:MyElasticBall
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
+
+        meb_my_ball = findViewById(R.id.meb_my_ball) as MyElasticBall
+
+        meb_my_ball.setOnClickListener { view -> meb_my_ball.simpleShakeTest()}
+
     }
 }

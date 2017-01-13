@@ -1,5 +1,6 @@
 package com.project.kongdy.myelasticball.view
 
+import android.animation.ValueAnimator
 import android.annotation.TargetApi
 import android.content.Context
 import android.content.res.TypedArray
@@ -31,9 +32,25 @@ class MyElasticBall : View {
      */
     private object mainPath : Path()
     /*
-    圆球半径
+    圆球基准值，表达成半径不太准确
      */
     private var radius = 10F
+    /*
+    右边水平基准线
+     */
+    private var rightHorizontal = 0F
+    /*
+    左边水平基准线
+     */
+    private var leftHorizontal = 0F
+    /*
+    上部分垂直基准线
+     */
+    private var topVertical = 0F
+    /*
+    底部垂直基准线
+     */
+    private var bottomVertical = 0F
 
     constructor(context: Context?) : this(context, null)
     constructor(context: Context?, attrs: AttributeSet?) : this(context, attrs, 0)
@@ -58,9 +75,14 @@ class MyElasticBall : View {
         mainPaint.strokeWidth = getRawSize(TypedValue.COMPLEX_UNIT_DIP, 5F)
         highEffect(mainPaint)
 
-        mainPaint.style = Paint.Style.STROKE
+        mainPaint.style = Paint.Style.FILL_AND_STROKE
         mainPaint.strokeCap = Paint.Cap.ROUND
         mainPaint.strokeJoin = Paint.Join.ROUND
+
+        leftPull(radius)
+        rightPull(radius)
+        topPull(radius)
+        bottomPull(radius)
     }
 
     /*
@@ -73,18 +95,54 @@ class MyElasticBall : View {
         paint.isSubpixelText = true// 像素自处理
     }
 
-    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
-        super.onSizeChanged(w, h, oldw, oldh)
-        val mWidth = w-paddingLeft-paddingRight
-        val mHeight = h-paddingTop-paddingBottom
+    /*
+     产生向右的形变
+     */
+    private fun rightPull(value:Float){
+        rightHorizontal = value
+    }
+    /*
+    产生向左的形变
+     */
+    private fun leftPull(value:Float){
+        leftHorizontal = value
+    }
+    /*
+    产生向上的形变
+     */
+    private fun topPull(value:Float){
+        topVertical = value
+    }
+    /*
+    产生向下的形变
+     */
+    private fun bottomPull(value: Float){
+        bottomVertical = value
+    }
 
-        val centerX = mWidth/2F
-        val centerY = mHeight/2F
+    /**
+     * 测试抖动效果
+     */
+    fun simpleShakeTest(){
+
+    }
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+
+        val centerX = measuredWidth/2F
+        val centerY = measuredHeight/2F
 
         mainPath.reset()
-        mainPath.moveTo(centerX,centerY+radius)
-        mainPath.cubicTo(centerX-radius,centerY,centerX,centerY-radius,centerX+radius,centerY)
-        mainPath.cubicTo(centerX,centerY-radius,centerX+radius,centerY,centerX,centerY+radius)
+        mainPath.moveTo(centerX,centerY+2*bottomVertical)
+        /*
+         绘制圆的四个部分
+         */
+        mainPath.cubicTo(centerX+rightHorizontal,centerY+2*bottomVertical,centerX+2*rightHorizontal,centerY+bottomVertical,centerX+2*rightHorizontal,centerY)
+        mainPath.cubicTo(centerX+2*rightHorizontal,centerY-topVertical,centerX+rightHorizontal,centerY-2*topVertical,centerX,centerY-2*topVertical)
+        mainPath.cubicTo(centerX-leftHorizontal,centerY-2*topVertical,centerX-2*leftHorizontal,centerY-topVertical,centerX-2*leftHorizontal,centerY)
+        mainPath.cubicTo(centerX-2*leftHorizontal,centerY+bottomVertical,centerX-leftHorizontal,centerY+2*bottomVertical,centerX,centerY+2*bottomVertical)
+        mainPath.close()
     }
 
     override fun onDraw(canvas: Canvas?) {

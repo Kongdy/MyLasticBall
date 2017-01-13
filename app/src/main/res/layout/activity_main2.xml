@@ -12,9 +12,10 @@
     tools:context="com.project.kongdy.myelasticball.MainActivity">
 
     <com.project.kongdy.myelasticball.view.MyElasticBall
+        android:id="@+id/meb_my_ball"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:m_ball_color="@android:color/holo_red_light"
-        app:m_ball_radius="10dp"/>
+        app:m_ball_radius="30dp"/>
 
 </RelativeLayout>
