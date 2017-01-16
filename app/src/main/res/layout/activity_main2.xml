@@ -16,6 +16,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:m_ball_color="@android:color/holo_red_light"
-        app:m_ball_radius="30dp"/>
+        app:m_ball_radius="60dp"/>
 
 </RelativeLayout>
