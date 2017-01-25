@@ -91,7 +91,7 @@ class MyElasticBall : View {
      */
     fun simpleShakeTest() {
         val reboundAnimator = ReboundAnimator()
-        reboundAnimator.duration = 1000
+        reboundAnimator.duration = 2000
         reboundAnimator.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationEnd(p0: Animation?) {
                 resetSize()
@@ -135,13 +135,11 @@ class MyElasticBall : View {
     }
 
     private fun calcOffset(time: Float): Float {
-        return (((1 - Math.exp(-2 * (time + 0.054)) * Math.cos(20 * (time + 0.054))) - 1) * radius*BERZIER_MAGIC_VALUE).toFloat()
+        return (((1 - Math.exp(-2 * (time + 0.052)) * Math.cos(20 * (time + 0.052))) - 1) * radius).toFloat()
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-
-
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
@@ -175,7 +173,7 @@ class MyElasticBall : View {
         override fun applyTransformation(interpolatedTime: Float, t: Transformation?) {
             super.applyTransformation(interpolatedTime, t)
             elapseTime = interpolatedTime
-            val offsetValue = calcOffset(elapseTime)
+            val offsetValue = -calcOffset(elapseTime)
 
             rightElasticPoint.adjustAllX(offsetValue)
             Log.e("asdf", "elapseTime" +elapseTime.toString()+",offsetValue:"+offsetValue.toString())
