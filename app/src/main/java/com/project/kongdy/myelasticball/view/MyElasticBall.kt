@@ -147,6 +147,7 @@ class MyElasticBall : View {
         resetSize()
     }
 
+
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         mainPath.reset()
@@ -169,7 +170,7 @@ class MyElasticBall : View {
         canvas?.restore()
     }
 
-    inner open class ReboundAnimator : Animation() {
+    open inner class ReboundAnimator : Animation() {
         override fun applyTransformation(interpolatedTime: Float, t: Transformation?) {
             super.applyTransformation(interpolatedTime, t)
             elapseTime = interpolatedTime
